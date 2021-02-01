@@ -70,8 +70,6 @@ class InitController:
 
         # TODO: Factor out the following URL validation to ConjurrcData class
         # and add integration tests
-        # At this time, providing ports is not supported and
-        # all urls must start with HTTPS.
         if url.scheme != 'https':
             raise RuntimeError(f"Error: undefined behavior. Reason: The Conjur URL format provided "
                    f"'{self.conjurrc_data.appliance_url}' is not supported.")
