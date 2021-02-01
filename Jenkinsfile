@@ -13,17 +13,17 @@ pipeline {
   }
 
   stages {
-    stage('Linting') {
-      parallel {
-        stage('Code') {
-          steps { sh './bin/test_linting' }
-        }
+//    stage('Linting') {
+//      parallel {
+//      stage('Code') {
+//        steps { sh './bin/test_linting' }
+//      }
 
-        stage('Changelog') {
-          steps { sh './bin/test_changelog' }
-        }
-      }
-    }
+//       stage('Changelog') {
+//          steps { sh './bin/test_changelog' }
+//        }
+//    }
+//   }
 
     stage('Unit tests') {
       steps {
@@ -37,18 +37,18 @@ pipeline {
         }
       }
     }
+// TEMPORARILY COMMENT OUT FOR FASTER BUILD TIMES WHEN ADDING UTS
+//    stage('Integration tests') {
+//      steps {
+//        sh './bin/test_integration'
+//     }
 
-    stage('Integration tests') {
-      steps {
-        sh './bin/test_integration'
-      }
-
-      post {
-        always {
-          junit 'output/**/*.xml'
-        }
-      }
-    }
+//      post {
+//        always {
+//          junit 'output/**/*.xml'
+//        }
+//      }
+//    }
 
     // Only publish if the HEAD is tagged with the same version as in __version__.py
     stage('Publish') {
